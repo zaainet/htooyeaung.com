@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* 1. FONT ROLLBACK: Reverted to Poppins & Playfair Display */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@100;300;400;500;600;700&display=swap');
 
     * {
       padding: 0;
       margin: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Body Font */
       scroll-behavior: smooth;
     }
 
@@ -24,51 +25,68 @@
       --card-bg: #ffffff;
     }
 
+    /* Start in Dark Mode colors by default */
     body {
       min-height: 100vh;
       width: 100%;
       overflow-x: hidden;
-      background-color: var(--light-bg);
-      color: var(--text-dark);
+      background-color: #0b0f19; 
+      color: #f1f5f9;
       transition: 0.3s;
       display: flex;
       flex-direction: column;
     }
 
-    body.dark {
-      background-color: #0b0f19;
-      color: var(--text-light);
+    /* LIGHT MODE OVERRIDES */
+    body.light {
+      background-color: var(--light-bg);
+      color: var(--text-dark);
     }
 
-    body.dark header {
-      background-color: #0b0f19;
-      border-bottom: 1px solid rgba(192, 160, 98, 0.2);
-    }
-
-    body.dark .card {
-      background-color: #1e293b;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    body.dark .card h3,
-    body.dark .card p {
-      color: var(--text-light);
+    body.light header {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     
-    body.dark .switch { background-color: #334155; }
-    
-    body.dark .contact-item {
-        background: rgba(255,255,255,0.05);
-        border-color: rgba(255,255,255,0.1);
+    body.light header h2 { color: var(--primary-navy); }
+    body.light header ul li a { color: var(--primary-navy); }
+    body.light header ul li a:hover { color: var(--accent-gold); }
+
+    body.light .card {
+      background-color: var(--light-bg);
+      box-shadow: none;
+      border: 1px solid rgba(0,0,0,0.05);
     }
     
-    body.dark .contact-item:hover {
-        border-color: var(--accent-gold);
-        background: rgba(192, 160, 98, 0.1);
+    body.light .card h3 { color: var(--primary-navy); }
+    body.light .card p { color: #64748b; }
+    
+    body.light .contact-item {
+        background: rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    body.light .contact-item .contact-text h4, 
+    body.light .contact-item .contact-text p,
+    body.light .contact-item ion-icon {
+        color: var(--primary-navy);
+    }
+    
+    body.light .left h3 { color: var(--primary-navy); }
+    body.light .left .des { color: var(--text-dark); }
+    body.light .switch { background-color: #e2e8f0; }
+    
+    /* Footer Light Mode */
+    body.light footer {
+        background-color: #e2e8f0;
+        color: var(--text-dark);
+        border-top: 1px solid rgba(0,0,0,0.1);
     }
 
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    /* --- Default Dark Mode Styles (Base) --- */
+    
+    h1, h2, h3 { font-family: 'Playfair Display', serif; } /* Header Font */
 
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -76,30 +94,28 @@
       padding: 0 8%;
       height: 90px;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: #0b0f19;
       backdrop-filter: blur(10px);
       position: fixed;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(192, 160, 98, 0.2);
       transition: 0.3s;
     }
 
     header h2 {
       font-size: 28px;
-      color: var(--primary-navy);
+      color: var(--accent-gold);
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: 700;
     }
-    
-    body.dark header h2 { color: var(--accent-gold); }
 
     header ul li { display: inline-block; margin-left: 25px; }
 
     header ul li a {
       text-decoration: none;
-      color: var(--primary-navy);
+      color: var(--text-light);
       font-weight: 500;
       font-size: 14px;
       text-transform: uppercase;
@@ -107,8 +123,6 @@
       transition: 0.3s ease;
       position: relative;
     }
-    
-    body.dark header ul li a { color: var(--text-light); }
 
     header ul li a::after {
       content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
@@ -127,21 +141,21 @@
       box-shadow: 0 4px 10px rgba(192, 160, 98, 0.4);
     }
 
-    /* Lock Icon for Admin */
-    .admin-lock {
-      position: fixed; bottom: 40px; right: 100px; font-size: 24px;
-      background-color: var(--primary-navy); color: white;
-      padding: 10px; border-radius: 50%; cursor: pointer; z-index: 999;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      transition: 0.3s;
+    /* --- Sticky TradingView Widget --- */
+    .tradingview-widget-container {
+        position: fixed;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        z-index: 990;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
-    .admin-lock:hover { transform: scale(1.1); }
 
-    .tradingview-widget-container { margin-top: 90px; width: 100%; z-index: 900; }
-
+    /* --- Hero Section --- */
     #home {
-      margin-top: 20px; display: flex; align-items: center;
-      justify-content: space-between; min-height: 85vh; 
+      margin-top: 140px; 
+      display: flex; align-items: center;
+      justify-content: space-between; min-height: 80vh; 
       width: 84%; margin-left: auto; margin-right: auto; position: relative;
     }
 
@@ -155,58 +169,56 @@
     }
 
     .left h3 {
-      font-size: 56px; color: var(--primary-navy); line-height: 1.1; margin-bottom: 20px;
+      font-size: 56px;
+      color: var(--text-light);
+      line-height: 1.1; margin-bottom: 20px;
     }
-    body.dark .left h3 { color: white; }
 
     .left .des {
-      font-size: 18px; color: var(--text-dark); opacity: 0.8; line-height: 1.6;
+      font-size: 18px; color: #cbd5e1;
+      opacity: 0.9; line-height: 1.8;
       border-left: 3px solid var(--accent-gold); padding-left: 20px;
     }
-    body.dark .left .des { color: #cbd5e1; }
 
     .left button {
-      background-color: var(--primary-navy); border: none; width: fit-content;
+      background-color: var(--accent-gold); border: none; width: fit-content;
       padding: 15px 35px; margin-top: 35px; cursor: pointer; transition: 0.3s; border-radius: 2px;
     }
-    body.dark .left button { background-color: var(--accent-gold); }
 
     .left button a {
-      text-decoration: none; color: white; font-weight: 500;
+      text-decoration: none; color: var(--primary-navy); font-weight: 600;
       letter-spacing: 1px; text-transform: uppercase; font-size: 14px;
     }
-    body.dark .left button a { color: var(--primary-navy); font-weight: 600;}
 
     .left button:hover {
-      background-color: var(--accent-gold); transform: translateY(-3px);
+      background-color: white; transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
-    body.dark .left button:hover { background-color: white; }
 
     .right { width: 45%; position: relative; display: flex; justify-content: center; }
 
     .hero-img {
       width: 400px; height: 500px; object-fit: cover;
-      border-radius: 10px; box-shadow: 20px 20px 0px var(--accent-gold);
+      border-radius: 5px;
+      box-shadow: 20px 20px 0px var(--accent-gold);
       transition: 0.5s;
     }
     .hero-img:hover { transform: translateY(-5px); box-shadow: 25px 25px 0px var(--accent-gold); }
 
     .bg-line {
-      position: absolute; width: 1px; height: 100%; background: rgba(0,0,0,0.05); z-index: -1;
+      position: absolute; width: 1px; height: 100%; background: rgba(255,255,255,0.05); z-index: -1;
     }
     .line1 { left: 10%; } .line2 { left: 90%; }
 
-    #services { padding: 120px 8%; background-color: white; flex-grow: 1; }
-    body.dark #services { background-color: #0b0f19; }
+    /* --- Services --- */
+    #services { padding: 120px 8%; background-color: #0b0f19; flex-grow: 1; }
 
     .section-header { text-align: center; margin-bottom: 60px; }
     
     .title {
-      font-size: 36px; color: var(--primary-navy); margin-bottom: 10px;
+      font-size: 36px; color: var(--text-light); margin-bottom: 10px;
       display: inline-block; position: relative;
     }
-    body.dark .title { color: white; }
 
     .title::after {
         content: ''; display: block; width: 60px; height: 3px;
@@ -218,23 +230,27 @@
     }
 
     .card {
-      background-color: var(--light-bg); padding: 40px 30px; transition: 0.4s;
-      border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden;
+      background-color: #1e293b;
+      padding: 40px 30px; transition: 0.4s;
+      border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
       border-radius: 4px; display: flex; flex-direction: column; align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
     .card:hover {
-      transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      transform: translateY(-10px); 
       border-bottom: 3px solid var(--accent-gold);
     }
 
     .card ion-icon { font-size: 45px; color: var(--accent-gold); margin-bottom: 25px; }
 
-    .card h3 { color: var(--primary-navy); font-size: 20px; margin-bottom: 15px; font-weight: 600; }
-    .card p { font-size: 14px; line-height: 1.7; color: #64748b; }
+    .card h3 { color: var(--text-light); font-size: 20px; margin-bottom: 15px; font-weight: 600; }
+    .card p { font-size: 14px; line-height: 1.7; color: #cbd5e1; }
 
+    /* --- Contact --- */
     #contact {
       background-color: var(--primary-navy); padding: 100px 8%; color: white;
-      text-align: center; margin-top: auto;
+      text-align: center;
+      /* removed margin-top: auto here because we added a footer */
     }
 
     #contact .title { color: white; margin-bottom: 60px; }
@@ -260,10 +276,32 @@
         font-size: 12px; opacity: 0.7; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 1px;
     }
     .contact-text p { font-size: 16px; font-weight: 500; }
-    a.contact-link { text-decoration: none; color: inherit; }
+    
+    a.contact-link, .contact-text a { 
+        text-decoration: none; color: inherit; transition: 0.3s;
+    }
+    .contact-text a:hover { color: var(--accent-gold); }
 
+    /* --- 2. FOOTER SECTION --- */
+    footer {
+        background-color: #05080f; /* Even darker than body for separation */
+        color: #64748b;
+        padding: 25px 8%;
+        text-align: center;
+        font-size: 13px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    footer span.highlight { color: var(--accent-gold); }
+
+    /* --- Switch --- */
     .switch {
-      background: #e2e8f0; height: 30px; width: 60px; padding: 0 4px;
+      background: #334155;
+      height: 30px; width: 60px; padding: 0 4px;
       border-radius: 20px; display: flex; align-items: center; cursor: pointer;
     }
 
@@ -272,59 +310,31 @@
       transition: 0.3s; display: flex; align-items: center; justify-content: center;
       color: var(--primary-navy); box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-
     .switchcircle.on {
       transform: translateX(28px); background-color: var(--primary-navy); color: var(--accent-gold);
     }
 
-    /* ADMIN PANEL STYLES */
-    .admin-modal {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center;
-    }
-    .admin-box {
-        background: white; padding: 40px; border-radius: 10px; text-align: center; width: 300px;
-    }
-    .admin-box h3 { color: var(--primary-navy); margin-bottom: 20px; }
-    .admin-box input {
-        width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc;
-    }
-    .admin-box button {
-        background: var(--primary-navy); color: white; padding: 10px 20px; border: none; cursor: pointer;
-    }
-    
-    .admin-bar {
-        display: none; position: fixed; top: 100px; right: 20px; z-index: 10000;
-        background: white; padding: 10px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .admin-bar button {
-        background: var(--accent-gold); color: white; border: none; padding: 8px 15px; margin-left: 5px; cursor: pointer; font-size: 12px;
-    }
-    
-    /* Editing Mode Indicators */
-    .editing .editable {
-        border: 1px dashed red;
-        cursor: text;
-    }
-    .editing .hero-img {
-        border: 5px solid red;
-        cursor: pointer;
-    }
-
     @media (max-width: 900px) {
       header { padding: 0 20px; height: 70px; } header h2 { font-size: 22px; }
-      .tradingview-widget-container { margin-top: 70px; }
+      
+      .tradingview-widget-container { top: 70px; }
+      #home { margin-top: 130px; }
+
       header ul {
         flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0;
-        width: 250px; padding-top: 100px; background-color: white;
+        width: 250px; padding-top: 100px; background-color: #0b0f19;
         transform: translateX(-100%); transition: 0.4s; box-shadow: 5px 0 15px rgba(0,0,0,0.1); align-items: flex-start;
       }
-      body.dark header ul { background-color: #0b0f19; }
+      
+      body.light header ul { background-color: white; }
+
       header ul.open { transform: translateX(0); } header ul li { margin: 15px 30px; display: block; }
-      .menu { display: block; font-size: 24px; color: var(--primary-navy); cursor: pointer; }
-      body.dark .menu { color: white; }
+      
+      .menu { display: block; font-size: 24px; color: var(--accent-gold); cursor: pointer; }
+      body.light .menu { color: var(--primary-navy); }
+
       #home {
-        flex-direction: column-reverse; height: auto; padding: 50px 0; margin-top: 20px; justify-content: center;
+        flex-direction: column-reverse; height: auto; padding: 50px 0; justify-content: center;
       }
       .left, .right { width: 100%; text-align: center; }
       .left { align-items: center; margin-top: 40px; }
@@ -332,7 +342,6 @@
       .left .des { border-left: none; padding-left: 0; font-size: 16px; width: 90%; }
       .hero-img { width: 300px; height: 380px; margin: 0 auto; }
       .contact-container { flex-direction: column; gap: 15px; } .contact-item { width: 100%; }
-      .admin-lock { right: 20px; bottom: 20px; }
       .up { bottom: 70px; right: 20px; }
     }
   </style>
@@ -340,9 +349,8 @@
   <title>Htoo Ye Aung | Strategic Investments</title>
 </head>
 
-<body>
+<body class="dark">
   <i class="uil uil-arrow-up up"></i>
-  <i class="uil uil-lock admin-lock" onclick="openAdmin()"></i>
 
   <div class="bg-line line1"></div>
   <div class="bg-line line2"></div>
@@ -355,29 +363,14 @@
       <li><a href="#contact" id="nav4">Connect</a></li>
       <li>
         <div class="switch">
-          <div class="switchcircle">
-            <ion-icon name="moon-outline"></ion-icon>
+          <div class="switchcircle on">
+            <ion-icon name="sunny-outline"></ion-icon>
           </div>
         </div>
       </li>
     </ul>
     <i class="uil uil-bars menu"></i>
   </header>
-
-  <div class="admin-modal" id="loginModal">
-      <div class="admin-box">
-          <h3>Admin Access</h3>
-          <input type="password" id="adminPass" placeholder="Enter Password">
-          <button onclick="checkPass()">Login</button>
-          <button onclick="closeAdmin()" style="background: #666; margin-top: 10px;">Cancel</button>
-      </div>
-  </div>
-
-  <div class="admin-bar" id="adminBar">
-      <span>Admin Mode Active</span>
-      <button onclick="saveChanges()">Save Changes</button>
-      <button onclick="logout()" style="background: #333;">Logout</button>
-  </div>
 
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
@@ -390,7 +383,7 @@
       { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
       { "description": "Brent Oil", "proName": "TVC:UKOIL" }
     ],
-    "showSymbolLogo": true, "colorTheme": "light", "isTransparent": false, "displayMode": "adaptive", "locale": "en"
+    "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": false, "displayMode": "adaptive", "locale": "en"
   }
   </script>
   </div>
@@ -399,7 +392,7 @@
     <div class="left">
       <span class="intro">Entrepreneur & Investor</span>
       <h3>Htoo Ye Aung</h3>
-      <p class="des editable" id="bioText">
+      <p class="des">
         Managing a diversified portfolio across **Natural Resources**, **Global Capital Markets**, and **Strategic Real Estate Development**. 
         <br><br>
         Driving wealth creation through calculated risk and industrial expertise.
@@ -407,39 +400,39 @@
       <button><a href="#services">View Portfolio</a></button>
     </div>
     <div class="right">
-      <img src="https://i.ibb.co/6c8mf4Dx/IMG-20251122-172609-559.jpg" alt="Htoo Ye Aung" class="hero-img" id="profilePic" onclick="changeImage()">
+      <img src="https://i.ibb.co/6c8mf4Dx/IMG-20251122-172609-559.jpg" alt="Htoo Ye Aung" class="hero-img">
     </div>
   </section>
 
   <section id="services">
     <div class="section-header">
         <h1 class="title">Strategic Ventures</h1>
-        <p style="margin-top: 10px; color: #64748b;" class="editable" id="serviceSub">Diversified operations ensuring sustainable growth.</p>
+        <p style="margin-top: 10px; color: #cbd5e1;">Diversified operations ensuring sustainable growth.</p>
     </div>
     
     <div class="cards">
       <div class="card">
         <ion-icon name="hammer-outline"></ion-icon>
-        <h3 class="editable" id="s1-title">Mining & Extraction</h3>
-        <p class="editable" id="s1-desc">Overseeing large-scale extraction and management of minerals and natural resources with a focus on operational efficiency.</p>
+        <h3>Mining & Extraction</h3>
+        <p>Overseeing large-scale extraction and management of minerals and natural resources with a focus on operational efficiency.</p>
       </div>
       
       <div class="card">
         <ion-icon name="trending-up-outline"></ion-icon>
-        <h3 class="editable" id="s2-title">Capital Markets</h3>
-        <p class="editable" id="s2-desc">Active trading in Global Stock Markets and Commodities (Gold/Metals) using data-driven technical analysis.</p>
+        <h3>Capital Markets</h3>
+        <p>Active trading in Global Stock Markets and Commodities (Gold/Metals) using data-driven technical analysis.</p>
       </div>
       
       <div class="card">
         <ion-icon name="business-outline"></ion-icon>
-        <h3 class="editable" id="s3-title">Real Estate</h3>
-        <p class="editable" id="s3-desc">Strategic property acquisition and high-value real estate speculation in emerging and established markets.</p>
+        <h3>Real Estate</h3>
+        <p>Strategic property acquisition and high-value real estate speculation in emerging and established markets.</p>
       </div>
 
       <div class="card">
         <ion-icon name="briefcase-outline"></ion-icon>
-        <h3 class="editable" id="s4-title">Business Advisory</h3>
-        <p class="editable" id="s4-desc">Providing high-level consultancy for businesses seeking operational restructuring and market expansion.</p>
+        <h3>Business Advisory</h3>
+        <p>Providing high-level consultancy for businesses seeking operational restructuring and market expansion.</p>
       </div>
     </div>
   </section>
@@ -447,11 +440,12 @@
   <section id="contact">
     <h1 class="title">Get In Touch</h1>
     <div class="contact-container">
+      
       <div class="contact-item">
-        <ion-icon name="call-outline"></ion-icon>
+        <ion-icon name="paper-plane-outline"></ion-icon>
         <div class="contact-text">
-            <h4>Direct Line</h4>
-            <p class="editable" id="contactPhone">09799674923</p>
+            <h4>Telegram</h4>
+            <p><a href="https://t.me/Htooyeaung_telegram" target="_blank">@Htooyeaung_telegram</a></p>
         </div>
       </div>
       
@@ -459,7 +453,7 @@
         <ion-icon name="mail-outline"></ion-icon>
         <div class="contact-text">
             <h4>Email Inquiries</h4>
-            <p class="editable" id="contactEmail">Htooye@gmail.com</p>
+            <p><a href="mailto:ya107231@gmail.com">ya107231@gmail.com</a></p>
         </div>
       </div>
 
@@ -474,6 +468,11 @@
       </a>
     </div>
   </section>
+
+  <footer>
+      <p>&copy; 2025 <span class="highlight">HYA Holdings</span>. All Rights Reserved.</p>
+      <p style="opacity: 0.7;">Strategic Investments • Mining • Real Estate</p>
+  </footer>
 
   <script>
     const menubtn = document.querySelector('.menu')
@@ -494,11 +493,8 @@
 
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
-      if (window.scrollY > 0) {
-        header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
-      } else {
-        header.style.boxShadow = "none";
-      }
+      header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+
       if (window.scrollY > 500) { up.style.display = "block" } else { up.style.display = "none" }
       if (menu.classList.contains('open')) {
         menu.classList.remove('open')
@@ -516,104 +512,40 @@
         }
     })
 
+    /* --- Dark Mode Logic (Default Dark) --- */
     const sw = document.querySelector('.switch')
     const swcircle = document.querySelector('.switchcircle')
 
-    if(localStorage.getItem('theme') === 'dark'){
+    if(localStorage.getItem('theme') === 'light'){
+        document.body.classList.add('light');
+        document.body.classList.remove('dark');
+        swcircle.classList.remove('on');
+        swcircle.innerHTML = `<ion-icon name="moon-outline"></ion-icon>`;
+    } else {
+        document.body.classList.remove('light');
         document.body.classList.add('dark');
         swcircle.classList.add('on');
         swcircle.innerHTML = `<ion-icon name="sunny-outline"></ion-icon>`;
     }
 
     sw.addEventListener('click', () => {
-      if (!swcircle.classList.contains('on')) {
-        swcircle.classList.add('on')
-        swcircle.innerHTML = `<ion-icon name="sunny-outline"></ion-icon>`
-        document.body.classList.add('dark')
+      if (document.body.classList.contains('light')) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        swcircle.classList.add('on');
+        swcircle.innerHTML = `<ion-icon name="sunny-outline"></ion-icon>`;
         localStorage.setItem('theme', 'dark');
       } else {
-        swcircle.classList.remove('on')
-        swcircle.innerHTML = `<ion-icon name="moon-outline"></ion-icon>`
-        document.body.classList.remove('dark')
+        document.body.classList.add('light');
+        document.body.classList.remove('dark');
+        swcircle.classList.remove('on');
+        swcircle.innerHTML = `<ion-icon name="moon-outline"></ion-icon>`;
         localStorage.setItem('theme', 'light');
       }
     })
-
-    /* --- ADMIN PANEL LOGIC --- */
-    const idsToSave = ['bioText', 'serviceSub', 's1-title', 's1-desc', 's2-title', 's2-desc', 's3-title', 's3-desc', 's4-title', 's4-desc', 'contactPhone', 'contactEmail'];
-    let isAdmin = false;
-
-    // Load saved data on startup
-    window.onload = function() {
-        idsToSave.forEach(id => {
-            if(localStorage.getItem(id)) {
-                document.getElementById(id).innerText = localStorage.getItem(id);
-            }
-        });
-        if(localStorage.getItem('profilePic')) {
-            document.getElementById('profilePic').src = localStorage.getItem('profilePic');
-        }
-    }
-
-    function openAdmin() {
-        document.getElementById('loginModal').style.display = 'flex';
-    }
-
-    function closeAdmin() {
-        document.getElementById('loginModal').style.display = 'none';
-    }
-
-    function checkPass() {
-        const pass = document.getElementById('adminPass').value;
-        if(pass === 'htooye') {
-            enableAdminMode();
-            closeAdmin();
-        } else {
-            alert('Incorrect Password');
-        }
-    }
-
-    function enableAdminMode() {
-        isAdmin = true;
-        document.body.classList.add('editing');
-        document.getElementById('adminBar').style.display = 'block';
-        
-        // Make text editable
-        idsToSave.forEach(id => {
-            document.getElementById(id).contentEditable = "true";
-        });
-    }
-
-    function saveChanges() {
-        idsToSave.forEach(id => {
-            localStorage.setItem(id, document.getElementById(id).innerText);
-        });
-        // Image is saved when changed
-        alert('Changes Saved Locally!');
-        logout();
-    }
-
-    function logout() {
-        isAdmin = false;
-        document.body.classList.remove('editing');
-        document.getElementById('adminBar').style.display = 'none';
-        idsToSave.forEach(id => {
-            document.getElementById(id).contentEditable = "false";
-        });
-    }
-
-    function changeImage() {
-        if(!isAdmin) return;
-        let newUrl = prompt("Enter new image URL:", document.getElementById('profilePic').src);
-        if(newUrl) {
-            document.getElementById('profilePic').src = newUrl;
-            localStorage.setItem('profilePic', newUrl);
-        }
-    }
-
   </script>
   
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
-    </html>
+</html>
