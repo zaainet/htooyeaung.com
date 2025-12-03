@@ -1,194 +1,802 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Htoo Ye Aung - Managing a diversified portfolio across Natural Resources, Global Capital Markets, and Strategic Real Estate Development.">
   <meta name="author" content="Htoo Ye Aung">
-  <link rel="canonical" href="[YOUR_SITE_URL_HERE]"> 
+  <meta name="keywords" content="investment, portfolio, mining, capital markets, real estate, business advisory">
   
-  <style>
-    /* ... (CSS is kept here for simplicity, but professionally it should be in style.css) ... */
-    /* All the existing CSS is kept in the <style> block as per your original file, 
-       but note that it's ideal to separate it. */
-    
-    /* [NEW CSS ADDITION/TWEAK] */
-    
-    /* 1. Added focus states for better accessibility */
-    a:focus, button:focus, .switch:focus, .contact-item:focus {
-        outline: 2px solid var(--accent-gold);
-        outline-offset: 3px;
-    }
-    
-    /* 2. Changed header fixed position to avoid scroll box-shadow repaint on scroll, moved to JS */
-    header.scrolled {
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    /* 3. Ensure TradingView widget is not covered by header in mobile view */
-    @media (max-width: 900px) {
-      .tradingview-widget-container { top: 70px; }
-      #home { margin-top: 130px; } /* Adjusted based on 70px header + widget */
-    }
-    
-    /* 4. Contact Link Accessibility Fix: Remove contact-link class and add role="link" */
-    .contact-item[role="link"]:hover { cursor: pointer; } 
-
-    /* [END NEW CSS TWEAK] */
-    /* ... (Your existing CSS continues below) ... */
-    
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@100;300;400;500;600;700&display=swap');
-
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif; 
-      scroll-behavior: smooth;
-    }
-
-    /* ... (rest of your CSS) ... */
-  </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"> 
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-  <title>Htoo Ye Aung | Strategic Investments</title>
+  
+  <title>Htoo Ye Aung | Strategic Investments Portfolio</title>
+  
+  <style>
+    /* ===== CSS RESET & VARIABLES ===== */
+    :root {
+      /* Light Theme Colors */
+      --primary-color: #1a365d;
+      --secondary-color: #2d3748;
+      --accent-color: #d4af37;
+      --accent-hover: #b8941f;
+      --background-color: #f8fafc;
+      --card-background: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      
+      /* Typography */
+      --font-primary: 'Inter', sans-serif;
+      --font-secondary: 'Manrope', sans-serif;
+      
+      /* Spacing */
+      --section-padding: 5rem 1.5rem;
+      --container-width: 1200px;
+      --border-radius: 12px;
+      --border-radius-sm: 8px;
+    }
+    
+    .dark-theme {
+      /* Dark Theme Colors */
+      --primary-color: #0f172a;
+      --secondary-color: #1e293b;
+      --accent-color: #d4af37;
+      --accent-hover: #e6c158;
+      --background-color: #0f172a;
+      --card-background: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --border-color: #334155;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+      --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    
+    body {
+      font-family: var(--font-primary);
+      color: var(--text-primary);
+      background-color: var(--background-color);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-secondary);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    ul {
+      list-style: none;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    section {
+      padding: var(--section-padding);
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: var(--accent-color);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+    }
+    
+    /* ===== HEADER & NAVIGATION ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(26, 54, 93, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark-theme header {
+      background-color: rgba(15, 23, 42, 0.95);
+    }
+    
+    header.scrolled {
+      padding: 0.7rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: var(--font-secondary);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo span {
+      color: var(--accent-color);
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    
+    /* ===== HERO SECTION ===== */
+    .hero {
+      padding-top: 10rem;
+      padding-bottom: 5rem;
+      background: linear-gradient(135deg, var(--primary-color) 0%, #2d3748 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dark-theme .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(to left, rgba(212, 175, 55, 0.1), transparent);
+      z-index: 1;
+    }
+    
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+    
+    .hero-image {
+      position: relative;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(212, 175, 55, 0.2), transparent);
+      z-index: 1;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      transition: transform 0.5s ease;
+    }
+    
+    .hero-image:hover img {
+      transform: scale(1.03);
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: #1a365d;
+      padding: 0.9rem 2.2rem;
+      border-radius: var(--border-radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(212, 175, 55, 0.2);
+    }
+    
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3);
+    }
+    
+    /* ===== TRADINGVIEW WIDGET ===== */
+    .tradingview-widget-container {
+      margin-top: 70px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* ===== SERVICES/VENTURES SECTION ===== */
+    .services {
+      background-color: var(--background-color);
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .service-card {
+      background-color: var(--card-background);
+      border-radius: var(--border-radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent-color);
+    }
+    
+    .service-icon {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .service-card p {
+      flex-grow: 1;
+    }
+    
+    /* ===== CONTACT SECTION ===== */
+    .contact {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+    
+    .dark-theme .contact {
+      background-color: #1e293b;
+    }
+    
+    .contact .section-title,
+    .contact .section-subtitle {
+      color: white;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .contact-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    
+    .contact-card:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-color);
+      transform: translateY(-5px);
+    }
+    
+    .contact-icon {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+    }
+    
+    .contact-details h4 {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    
+    .contact-details p {
+      color: #cbd5e1;
+      margin-bottom: 0;
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    
+    .dark-theme footer {
+      background-color: #0f172a;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-family: var(--font-secondary);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-logo span {
+      color: var(--accent-color);
+    }
+    
+    .footer-tagline {
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+    
+    .copyright {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .copyright .highlight {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+    
+    /* ===== SCROLL TO TOP BUTTON ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .scroll-top:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-5px);
+    }
+    
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        background-color: var(--card-background);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      .nav-links a {
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        padding: 0.8rem 0;
+        width: 100%;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .hero {
+        padding-top: 8rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .services-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-description,
+      .section-subtitle {
+        font-size: 1rem;
+      }
+      
+      section {
+        padding: 3rem 1rem;
+      }
+      
+      .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 
-<body class="dark">
-  <i class="uil uil-arrow-up up" aria-label="Go to top"></i>
-
-  <div class="bg-line line1"></div>
-  <div class="bg-line line2"></div>
-
-  <header id="main-header">
-    <h2>HYA Holdings</h2>
-    <nav> 
-        <ul id="nav-menu"> 
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Ventures</a></li>
+<body class="dark-theme">
+  <!-- Scroll to top button -->
+  <div class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <i class="uil uil-arrow-up"></i>
+  </div>
+  
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="#home" class="logo">HYA <span>Holdings</span></a>
+      
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <i class="uil uil-bars"></i>
+      </button>
+      
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#ventures">Ventures</a></li>
           <li><a href="#contact">Connect</a></li>
           <li>
-            <div class="switch" role="switch" aria-checked="false" aria-label="Toggle Dark/Light Mode"> 
-              <div class="switchcircle on">
-                <ion-icon name="sunny-outline"></ion-icon>
-              </div>
-            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+              <i class="uil uil-moon" id="themeIcon"></i>
+            </button>
           </li>
         </ul>
-    </nav>
-    <i class="uil uil-bars menu" id="menu-btn" role="button" aria-controls="nav-menu" aria-expanded="false"></i> 
+      </nav>
+    </div>
   </header>
-
+  
+  <!-- TradingView Widget -->
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
     {
-    "symbols": [
-      { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
-      { "proName": "FX_IDC:USDMMK", "title": "USD/MMK" },
-      { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
-      { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-      { "description": "Brent Oil", "proName": "TVC:UKOIL" }
-    ],
-    "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": false, "displayMode": "adaptive", "locale": "en"
-  }
-  </script>
+      "symbols": [
+        { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
+        { "proName": "FX_IDC:USDMMK", "title": "USD/MMK" },
+        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+        { "description": "Brent Oil", "proName": "TVC:UKOIL" }
+      ],
+      "showSymbolLogo": true,
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "locale": "en"
+    }
+    </script>
   </div>
-
-  <main> <section id="home">
-      <div class="left">
-        <span class="intro">Entrepreneur & Investor</span>
-        <h3>Htoo Ye Aung</h3>
-        <p class="des">
-          Managing a diversified portfolio across **Natural Resources**, **Global Capital Markets**, and **Strategic Real Estate Development**. 
+  
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <p class="hero-tagline">Entrepreneur & Investor</p>
+        <h1>Htoo Ye Aung</h1>
+        <p class="hero-description">
+          Managing a diversified portfolio across <strong>Natural Resources</strong>, <strong>Global Capital Markets</strong>, and <strong>Strategic Real Estate Development</strong>.
           <br><br>
           Driving wealth creation through calculated risk and industrial expertise.
         </p>
-        <button id="portfolio-btn"> <a href="#services">View Portfolio</a>
-        </button>
+        <a href="#ventures" class="btn">View Portfolio</a>
       </div>
-      <div class="right">
+      <div class="hero-image">
         <img src="https://i.ibb.co/6c8mf4Dx/IMG-20251122-172609-559.jpg" 
-             alt="Htoo Ye Aung - Professional Portrait" class="hero-img" loading="lazy">
+             alt="Htoo Ye Aung - Professional Portrait" loading="lazy">
       </div>
-    </section>
-
-    <section id="services">
-      <div class="section-header">
-          <h1 class="title">Strategic Ventures</h1>
-          <p style="margin-top: 10px; color: #cbd5e1;">Diversified operations ensuring sustainable growth.</p>
-      </div>
+    </div>
+  </section>
+  
+  <!-- Ventures Section -->
+  <section id="ventures" class="services">
+    <div class="container">
+      <h2 class="section-title">Strategic Ventures</h2>
+      <p class="section-subtitle">Diversified operations ensuring sustainable growth.</p>
       
-      <div class="cards">
-        <div class="card">
-          <ion-icon name="hammer-outline"></ion-icon>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <ion-icon name="hammer-outline"></ion-icon>
+          </div>
           <h3>Mining & Extraction</h3>
           <p>Overseeing large-scale extraction and management of minerals and natural resources with a focus on operational efficiency.</p>
         </div>
-        <div class="card">
-          <ion-icon name="trending-up-outline"></ion-icon>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <ion-icon name="trending-up-outline"></ion-icon>
+          </div>
           <h3>Capital Markets</h3>
           <p>Active trading in Global Stock Markets and Commodities (Gold/Metals) using data-driven technical analysis.</p>
         </div>
-        <div class="card">
-          <ion-icon name="business-outline"></ion-icon>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <ion-icon name="business-outline"></ion-icon>
+          </div>
           <h3>Real Estate</h3>
           <p>Strategic property acquisition and high-value real estate speculation in emerging and established markets.</p>
         </div>
-        <div class="card">
-          <ion-icon name="briefcase-outline"></ion-icon>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <ion-icon name="briefcase-outline"></ion-icon>
+          </div>
           <h3>Business Advisory</h3>
           <p>Providing high-level consultancy for businesses seeking operational restructuring and market expansion.</p>
         </div>
       </div>
-    </section>
-
-    <section id="contact">
-      <h1 class="title">Get In Touch</h1>
-      <div class="contact-container">
-        
-        <div class="contact-item" role="link" tabindex="0" data-link="https://t.me/Htooyeaung_telegram"> 
-          <ion-icon name="paper-plane-outline"></ion-icon>
-          <div class="contact-text">
-              <h4>Telegram</h4>
-              <p>@Htooyeaung_telegram</p>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">Connect for strategic partnerships and investment opportunities.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-card" id="telegramContact" role="link" tabindex="0" data-link="https://t.me/Htooyeaung_telegram">
+          <div class="contact-icon">
+            <ion-icon name="paper-plane-outline"></ion-icon>
+          </div>
+          <div class="contact-details">
+            <h4>Telegram</h4>
+            <p>@Htooyeaung_telegram</p>
           </div>
         </div>
         
-        <div class="contact-item" role="link" tabindex="0" data-link="mailto:Htooye@gmail.com">
-          <ion-icon name="mail-outline"></ion-icon>
-          <div class="contact-text">
-              <h4>Email Inquiries</h4>
-              <p>Htooye@gmail.com</p>
+        <div class="contact-card" id="emailContact" role="link" tabindex="0" data-link="mailto:Htooye@gmail.com">
+          <div class="contact-icon">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+          <div class="contact-details">
+            <h4>Email Inquiries</h4>
+            <p>Htooye@gmail.com</p>
           </div>
         </div>
-
-        <div class="contact-item" role="link" tabindex="0" data-link="https://www.facebook.com/share/1AFiFDiHmP/">
-          <ion-icon name="logo-facebook"></ion-icon>
-          <div class="contact-text">
-              <h4>Social Media</h4>
-              <p>Connect on Facebook</p>
+        
+        <div class="contact-card" id="facebookContact" role="link" tabindex="0" data-link="https://www.facebook.com/share/1AFiFDiHmP/">
+          <div class="contact-icon">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </div>
+          <div class="contact-details">
+            <h4>Social Media</h4>
+            <p>Connect on Facebook</p>
           </div>
         </div>
       </div>
-    </section>
-  </main>
-
+    </div>
+  </section>
+  
+  <!-- Footer -->
   <footer>
-      <p>&copy; <span id="current-year"></span> <span class="highlight">HYA Holdings</span>. All Rights Reserved.</p> 
-      <p style="opacity: 0.7;">Strategic Investments • Mining • Real Estate</p>
+    <div class="container footer-content">
+      <div class="footer-logo">HYA <span>Holdings</span></div>
+      <p class="footer-tagline">Strategic Investments • Mining • Real Estate • Capital Markets</p>
+      <div class="copyright">
+        <p>&copy; <span id="currentYear"></span> <span class="highlight">HYA Holdings</span>. All Rights Reserved.</p>
+      </div>
+    </div>
   </footer>
-
+  
+  <!-- Firebase & Custom JavaScript -->
   <script type="module">
-    // Import from specific Firebase CDN URLs to avoid bundling/build setup
+    // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
     import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
     
-    // Config: IMPORTANT - Use environmental variables in a real-world scenario!
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBdjKovYH40zhFqF7pzzmFmyufnIazjS6E",
       authDomain: "htooyeaung-app.firebaseapp.com",
@@ -198,118 +806,201 @@
       appId: "1:942282729342:web:703fed7f9d481e28f8752f",
       measurementId: "G-KPRV3PZM6M"
     };
-
-    // Initialize Firebase and Analytics
+    
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-
-    // --- Core Website JS Logic (Refactored and Improved) ---
-
-    // 1. DOM Element Selection (using const for performance and scope)
-    const menuBtn = document.getElementById('menu-btn');
-    const navMenu = document.getElementById('nav-menu');
-    const header = document.getElementById('main-header'); 
-    const upBtn = document.querySelector('.up');
-    const themeSwitch = document.querySelector('.switch');
-    const switchCircle = document.querySelector('.switchcircle');
-    const portfolioBtn = document.getElementById('portfolio-btn');
-    const contactItems = document.querySelectorAll('.contact-item[role="link"]');
-
-
-    // 2. Menu Toggling Logic (Cleaned up)
-    function toggleMenu() {
-        const isOpen = navMenu.classList.toggle('open');
-        menuBtn.classList.toggle('uil-bars', !isOpen);
-        menuBtn.classList.toggle('uil-times', isOpen);
-        menuBtn.setAttribute('aria-expanded', isOpen);
-    }
-    menuBtn.addEventListener('click', toggleMenu);
-
-    // 3. Scroll and Header Logic (Optimized for performance)
-    function handleScroll() {
-      // Header Shadow: Use classList instead of inline styles for better CSS performance
-      header.classList.toggle('scrolled', window.scrollY > 0); 
-
-      // Scroll to Top Button Visibility
-      upBtn.style.display = window.scrollY > 500 ? "block" : "none";
-
-      // Close menu on scroll if open
-      if (navMenu.classList.contains('open')) {
-        toggleMenu();
+    
+    // DOM Elements
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const header = document.getElementById('header');
+    const currentYearEl = document.getElementById('currentYear');
+    const contactCards = document.querySelectorAll('.contact-card');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    
+    // Set current year in footer
+    currentYearEl.textContent = new Date().getFullYear();
+    
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      const isDark = document.body.classList.contains('dark-theme');
+      
+      if (isDark) {
+        document.body.classList.remove('dark-theme');
+        themeIcon.classList.remove('uil-sun');
+        themeIcon.classList.add('uil-moon');
+        localStorage.setItem('theme', 'light');
+        
+        // Update TradingView widget theme
+        updateTradingViewTheme('light');
+      } else {
+        document.body.classList.add('dark-theme');
+        themeIcon.classList.remove('uil-moon');
+        themeIcon.classList.add('uil-sun');
+        localStorage.setItem('theme', 'dark');
+        
+        // Update TradingView widget theme
+        updateTradingViewTheme('dark');
       }
     }
-    window.addEventListener('scroll', handleScroll);
-
-    // 4. Smooth Scrolling Navigation & Menu Close
-    document.querySelectorAll('#nav-menu a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Prevent default anchor jump, but allow the smooth scroll behavior defined in CSS
-            // e.preventDefault(); // Commented out to allow smooth scroll CSS to work
-
-            if (navMenu.classList.contains('open')) {
-                // If it was mobile menu, close it after click
-                toggleMenu(); 
-            }
-        });
-    });
-    upBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-
-    // 5. Dark Mode Logic (Refactored for efficiency)
-    function applyTheme(theme) {
-        if (theme === 'light') {
-            document.body.classList.remove('dark');
-            document.body.classList.add('light');
-            switchCircle.classList.remove('on');
-            switchCircle.innerHTML = `<ion-icon name="moon-outline"></ion-icon>`;
-            themeSwitch.setAttribute('aria-checked', 'false');
-        } else { // default to dark
-            document.body.classList.remove('light');
-            document.body.classList.add('dark');
-            switchCircle.classList.add('on');
-            switchCircle.innerHTML = `<ion-icon name="sunny-outline"></ion-icon>`;
-            themeSwitch.setAttribute('aria-checked', 'true');
-        }
-        localStorage.setItem('theme', theme);
+    
+    // Function to update TradingView widget theme
+    function updateTradingViewTheme(theme) {
+      const widget = document.querySelector('.tradingview-widget-container__widget');
+      if (widget && widget.querySelector('iframe')) {
+        // This would typically require reloading the widget with new theme
+        // For now, we'll just note that the widget should be re-initialized with the correct theme
+        console.log(`TradingView widget should be updated to ${theme} theme`);
+      }
     }
-
-    // Initialize theme based on localStorage
+    
+    // Initialize theme from localStorage
     const savedTheme = localStorage.getItem('theme');
-    applyTheme(savedTheme || 'dark'); // Default to 'dark' if no theme is saved
-
-    themeSwitch.addEventListener('click', () => {
-        const newTheme = document.body.classList.contains('light') ? 'dark' : 'light';
-        applyTheme(newTheme);
+    if (savedTheme === 'light') {
+      document.body.classList.remove('dark-theme');
+      themeIcon.classList.remove('uil-sun');
+      themeIcon.classList.add('uil-moon');
+    } else {
+      document.body.classList.add('dark-theme');
+      themeIcon.classList.remove('uil-moon');
+      themeIcon.classList.add('uil-sun');
+    }
+    
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      navLinks.classList.toggle('active');
+      mobileToggle.querySelector('i').classList.toggle('uil-bars');
+      mobileToggle.querySelector('i').classList.toggle('uil-times');
+    }
+    
+    // Scroll to Top Functionality
+    function toggleScrollTopButton() {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+    
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Header scroll effect
+    function updateHeaderOnScroll() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+    
+    // Contact card click handler
+    function handleContactClick(event) {
+      const link = event.currentTarget.dataset.link;
+      if (link) {
+        window.open(link, '_blank');
+        
+        // Log analytics event
+        const contactType = event.currentTarget.id;
+        logEvent(analytics, 'contact_clicked', {
+          contact_method: contactType
+        });
+      }
+    }
+    
+    // Close mobile menu when clicking a link
+    function closeMobileMenuOnClick() {
+      if (navLinks.classList.contains('active')) {
+        toggleMobileMenu();
+      }
+    }
+    
+    // Active nav link on scroll
+    function setActiveNavLink() {
+      const scrollPosition = window.scrollY + 100;
+      
+      navAnchors.forEach(link => {
+        const section = document.querySelector(link.hash);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        }
+      });
+    }
+    
+    // Event Listeners
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileToggle.addEventListener('click', toggleMobileMenu);
+    scrollTopBtn.addEventListener('click', scrollToTop);
+    
+    window.addEventListener('scroll', () => {
+      toggleScrollTopButton();
+      updateHeaderOnScroll();
+      setActiveNavLink();
     });
     
-    // 6. Contact Item Click Handling (A11Y Improvement)
-    contactItems.forEach(item => {
-        const url = item.dataset.link;
-        item.addEventListener('click', () => {
-            if (url) window.open(url, '_blank').focus();
-        });
-        // Make it work with keyboard (Enter key)
-        item.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                if (url) window.open(url, '_blank').focus();
-            }
-        });
+    // Contact card events
+    contactCards.forEach(card => {
+      card.addEventListener('click', handleContactClick);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleContactClick(e);
+        }
+      });
     });
-
-    // 7. Dynamic Year in Footer (Cleanliness)
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // 8. Firebase Analytics: Tracking Key Actions (Added Value)
-    portfolioBtn.addEventListener('click', () => {
-        // Log the custom event when portfolio button is clicked
-        logEvent(analytics, 'view_portfolio_clicked', {
-            location: 'home_section'
-        });
-        // Existing behavior to scroll to #services is handled by the <a> tag inside
+    
+    // Nav link events
+    navAnchors.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          closeMobileMenuOnClick();
+          
+          // Log analytics event
+          logEvent(analytics, 'navigation_click', {
+            section: targetId
+          });
+        }
+      });
     });
-
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target) && navLinks.classList.contains('active')) {
+        toggleMobileMenu();
+      }
+    });
+    
+    // Initialize
+    toggleScrollTopButton();
+    updateHeaderOnScroll();
+    setActiveNavLink();
+    
+    // Log page view
+    logEvent(analytics, 'page_view');
   </script>
-  
-  </body>
+</body>
 </html>
